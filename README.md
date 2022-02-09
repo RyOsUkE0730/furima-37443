@@ -79,7 +79,6 @@
 | address            | string     | null: false                    |
 | building_name      | string     |                                | 
 | telephone_num      | string     | null: false                    |
-| user               | references | null: false, foreign_key: true |
 
 ## Association
 
