@@ -1,11 +1,11 @@
 # テーブル設計
 
-## User テーブル
+## Users テーブル
 
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
 | nickname           | string     | null: false                    |
-| email              | string     | null: false, unique: true      | 
+| email              | string     | null: false, unique: true      |
 | encrypted_password | string     | null: false                    |
 | first_name         | string     | null: false                    |
 | last_name          | string     | null: false                    |
@@ -20,18 +20,18 @@
 - has_many : orders
 
 
-## Item テーブル
+## Items テーブル
 
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | -------------------------      |
 | item_name          | string     | null: false                    |
 | description        | text       | null: false                    |
-| category           | text       | null: false                    |
-| condition          | string     | null: false                    |
-| delivery_charge    | string     | null: false                    |
-| consignor_area     | string     | null: false                    |
-| delivery_time      | string     | null: false                    |
-| selling_place      | integer    | null: false                    |
+| category_id        | integer    | null: false                    |
+| condition_id       | integer    | null: false                    |
+| delivery_charge_id | integer    | null: false                    |
+| prefecture_id      | integer    | null: false                    |
+| delivery_time_id   | integer    | null: false                    |
+| selling_price      | integer    | null: false                    |
 | user               | references | null: false, foreign_key: true | 
 
 ## Association
@@ -41,7 +41,7 @@
 - has_one : order
 
 
-## Comment テーブル
+## Comments テーブル
 
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | -------------------------      |
@@ -55,7 +55,7 @@
 - belongs_to : item
 
 
-## Oder テーブル
+## Orders テーブル
 
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | -------------------------      |
@@ -66,22 +66,21 @@
 
 - belongs_to : user
 - belongs_to : item
-- has_one : Buyer
+- has_one : buyer
 
 
-## Buyer テーブル
+## Buyers テーブル
 
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | -------------------------      |
-| post_code          | integer    | null: false                    |
-| prefecture         | string     | null: false                    |
+| post_code          | string     | null: false                    |
+| prefecture_id      | integer    | null: false                    |
 | municipalities     | string     | null: false                    |
 | address            | string     | null: false                    |
 | building_name      | string     |                                | 
-| telephone_num      | integer    | null: false                    |
+| telephone_num      | string     | null: false                    |
 | user               | references | null: false, foreign_key: true |
 
 ## Association
 
-- belongs_to : user
-- belongs_to : oder
+- belongs_to : order
