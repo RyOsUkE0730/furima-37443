@@ -4,6 +4,7 @@ class Item < ApplicationRecord
   belongs_to :condition
   belongs_to :delivery_charge
   belongs_to :prefecture
+  belongs_to :delivery_time
 
   belongs_to :user
   has_one_attached :image
