@@ -16,7 +16,7 @@ class Item < ApplicationRecord
     validates :delivery_charge_id
     validates :prefecture_id
     validates :delivery_time_id
-    validates :selling_price
+    validates :selling_price, numericality: { in: 300..9999999 }, format: { with: /\A[0-9]+\z/ }
   end
 
   with_options numericality: { other_than: 0, message: "can't be blank" } do
