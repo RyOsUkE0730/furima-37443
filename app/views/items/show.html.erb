@@ -7,7 +7,6 @@
     <%= @item.item_name %>
     </h2>
     <div class="item-img-content">
-      
       <%= image_tag @item.image ,class:"item-box-img" %>
       <%# if @item.order.present? %>
         <%# <div class='sold-out'>
@@ -15,29 +14,25 @@
         </#div>
       <%# end %>
     </div>
-
     <div class="item-price-box">
       <span class="item-price">
-      <%= "#{@item.selling_price}円" %>
+        <%= "#{@item.selling_price}円" %>
       </span>
       <span class="item-postage">
-      <%= @item.delivery_charge.name %>
+        <%= @item.delivery_charge.name %>
       </span>
     </div>
 
     <% if user_signed_in? && current_user.id == @item.user_id %>
-
     <%# if user_signed_in? && current_user.id == @item.user_id && @item.order.blank? %>
-    <%= link_to "商品の編集", "#", method: :get, class: "item-red-btn" %>
+      <%= link_to "商品の編集", "#", method: :get, class: "item-red-btn" %>
       <p class="or-text">or</p>
-    <%= link_to "削除", "#", method: :delete, class:"item-destroy" %>
+      <%= link_to "削除", "#", method: :delete, class:"item-destroy" %>
     <% end %>
 
-    <%# 購入ボタンの表示%>
     <% if user_signed_in? && current_user.id != @item.user_id %>
-
     <%# if user_signed_in? && current_user.id != @item.user_id && @item.order.blank? %>
-    <%= link_to "購入画面に進む", "#" ,class:"item-red-btn"%>
+      <%= link_to "購入画面に進む", "#" ,class:"item-red-btn"%>
     <% end %>
 
     <div class="item-explain-box">
@@ -45,39 +40,32 @@
     </div>
     <table class="detail-table">
       <tbody>
-
         <tr>
           <th class="detail-item">出品者</th>
           <td class="detail-value"><%= @item.item_name %></td>
         </tr>
-
         <tr>
           <th class="detail-item">カテゴリー</th>
           <td class="detail-value"><%= @item.category.name %></td>
         </tr>
-
         <tr>
           <th class="detail-item">商品の状態</th>
           <td class="detail-value"><%= @item.condition.name %></td>
         </tr>
-
         <tr>
           <th class="detail-item">配送料の負担</th>
           <td class="detail-value"><%= @item.delivery_charge.name %></td>
         </tr>
-
         <tr>
           <th class="detail-item">発送元の地域</th>
           <td class="detail-value"><%= @item.prefecture.name %></td>
         </tr>
-
         <tr>
           <th class="detail-item">発送日の目安</th>
           <td class="detail-value"><%= @item.delivery_time.name %></td>
         </tr>
       </tbody>
     </table>
-
     <div class="option">
       <div class="favorite-btn">
         <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
@@ -113,7 +101,7 @@
       後ろの商品 ＞
     </a>
   </div>
-    <a href="#" class="another-item"><%= @item.category.name %>をもっと見る</a>
+  <a href="#" class="another-item"><%= @item.category.name %>をもっと見る</a>
 </div>
 
 <%= render "shared/footer" %>
