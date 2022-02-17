@@ -7,13 +7,15 @@ RSpec.describe OrderBuyer, type: :model do
 
   describe '商品購入' do
     context '商品が購入できるとき' do
-      it 'すべての記入項目が存在していれば、商品を購入できる' do
+      it 'token含めすべての記入項目が存在していれば、商品を購入できる' do
         expect(@order_buyer).to be_valid
       end
+
       it '建物名が存在しなくても、商品を購入できる' do
         @order_buyer.building_name = ""
         expect(@order_buyer).to be_valid
       end
+
     end
 
     context '商品が購入できないとき' do
@@ -69,6 +71,12 @@ RSpec.describe OrderBuyer, type: :model do
         @order_buyer.telephone_num = '00000000'
         @order_buyer.valid?
         expect(@order_buyer.errors.full_messages).to include("Telephone num is invalid")
+      end
+
+      it "tokenが空では登録できないこと" do
+        @order_buyer.token = nil
+        @order_buyer.valid?
+        expect(@order_buyer.errors.full_messages).to include("Token can't be blank")
       end
     end
   end
