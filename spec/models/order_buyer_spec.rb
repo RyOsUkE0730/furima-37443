@@ -66,8 +66,14 @@ RSpec.describe OrderBuyer, type: :model do
         expect(@order_buyer.errors.full_messages).to include('Telephone num is invalid')
       end
 
-      it '電話番号が[10桁もしくは11桁]でなければ購入できない' do
+      it '電話番号が[10桁未満]では購入できない' do
         @order_buyer.telephone_num = '00000000'
+        @order_buyer.valid?
+        expect(@order_buyer.errors.full_messages).to include('Telephone num is invalid')
+      end
+
+      it '電話番号が[12桁以上]では購入できない' do
+        @order_buyer.telephone_num = '000000000000'
         @order_buyer.valid?
         expect(@order_buyer.errors.full_messages).to include('Telephone num is invalid')
       end
@@ -76,6 +82,18 @@ RSpec.describe OrderBuyer, type: :model do
         @order_buyer.token = nil
         @order_buyer.valid?
         expect(@order_buyer.errors.full_messages).to include("Token can't be blank")
+      end
+
+      it 'user_idが空だと保存できない' do
+        @order_buyer.user_id = nil
+        @order_buyer.valid?
+        expect(@order_buyer.errors.full_messages).to include("User can't be blank")
+      end
+
+      it 'item_idが空だと保存できない' do
+        @order_buyer.item_id = nil
+        @order_buyer.valid?
+        expect(@order_buyer.errors.full_messages).to include("Item can't be blank")
       end
     end
   end
