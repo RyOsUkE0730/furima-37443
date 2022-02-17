@@ -13,7 +13,6 @@ class OrdersController < ApplicationController
 
   def create
     @order_buyer = OrderBuyer.new(order_params)
-
     if @order_buyer.valid?
       @order_buyer.save
       redirect_to root_path
