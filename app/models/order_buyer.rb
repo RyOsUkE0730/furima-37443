@@ -3,7 +3,7 @@ class OrderBuyer
   attr_accessor :post_code, :prefecture_id, :municipalities, :address, :building_name, :telephone_num, :item_id, :user_id, :token
 
   with_options presence: true do
-    validates :post_code, format: { with: /\A\d{3}[-]\d{4}\z/ }
+    validates :post_code, format: { with: /\A\d{3}-\d{4}\z/ }
     validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank" }
     validates :municipalities
     validates :address
