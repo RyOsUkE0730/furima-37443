@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :move_to_index, except: [:index, :show]
   before_action :set_id, only: [:show, :edit, :update, :destroy]
+  before_action :prevent_edit: :edit
 
   def index
     @items = Item.all.order('created_at DESC')
@@ -24,9 +25,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    unless current_user.id == @item.user_id
-      redirect_to root_path
-    end
+    redirect_to root_path unless current_user.id == @item.user_id
   end
 
   def update
@@ -60,8 +59,7 @@ class ItemsController < ApplicationController
       :delivery_time_id,
       :selling_price,
       :image
-    )
-          .merge(user_id: current_user.id)
+    ).merge(user_id: current_user.id)
   end
 
   def move_to_index
@@ -70,5 +68,11 @@ class ItemsController < ApplicationController
 
   def set_id
     @item = Item.find(params[:id])
+  end
+
+  def prevent_edit
+    if @item.user_id != current_user.id || @item.order != nil
+      redirect_to root_path
+    end
   end
 end
